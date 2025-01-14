@@ -21,7 +21,7 @@ def search_exito(term):
 
     results = []
 
-    for index, li in enumerate(li_elements, start=1):
+    for li in li_elements:
         product_info = li.text.split("\n")
         name = product_info[0]
         for line in product_info:
@@ -46,5 +46,3 @@ def search_exito(term):
         results.append(result)
 
     return results
-
-    
