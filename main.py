@@ -2,9 +2,8 @@
 import requests
 from bs4 import BeautifulSoup
 
-
 class Product:
-    """Class a prodcut with methods fo fetch prices given URLs"""
+    """Class of a prodcut with methods fo fetch prices given URLs"""
     def __init__(self, name, urls):
         self.name = name
         self.urls = urls
@@ -29,16 +28,3 @@ class Product:
                 # agregar makro
             else:
                 print(f"Site {domain} not supported yet")
-
-
-vino = Product(
-    "Vino",
-    [
-        "https://www.exito.com/vino-espumoso-rose-ice-edition-x-750-ml-589856/p",
-        "https://www.carulla.com/vino-espumoso-rose-ice-edition-x-750-ml-589856/p",
-        "https://www.tiendasjumbo.co/vino-j-p-chenet-espumoso-ice-edition-rosado-bot-x-750ml/p"
-    ],
-)
-
-vino.get_prices()
-print(vino.prices)
