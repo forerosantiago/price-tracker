@@ -19,8 +19,7 @@ def search_exito(term):
     # find all li elements within the ul element
     li_elements = ul_element.find_elements(By.TAG_NAME, "li")
 
-    # print the number of li elements found
-    print(f'{len(li_elements)} products found for "{term}"')
+    results = []
 
     for index, li in enumerate(li_elements, start=1):
         product_info = li.text.split("\n")
@@ -38,11 +37,14 @@ def search_exito(term):
         a_element = li.find_element(By.TAG_NAME, "a")
         url = a_element.get_attribute("href")
 
-        print()
+        result = {
+            "name": name,
+            "price": price,
+            "url": url
+        }
 
-        print(f"{index}. {name}\033[0m")
-        print(f"Price: {price}")
-        print(f"URL: {url}")
+        results.append(result)
 
-        print()
-        print("---------------------------------")
+    return results
+
+    
