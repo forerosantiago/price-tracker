@@ -6,7 +6,7 @@ from selenium.common.exceptions import NoSuchElementException
 
 
 def search_exito(term):
-    """Search a product on Exito and print the result's full name, price and URL."""
+    """Search a product on Exito and return a list with the result's full name, price and URL."""
     driver = webdriver.Firefox()
 
     url = f"https://www.exito.com/s?q={term.replace(' ', '-')}&sort=score_desc&page=0"
@@ -43,7 +43,6 @@ def search_exito(term):
             price = price.replace("$", "").replace(" ", "").replace(".", "")
             price = float(price)
 
-            print(price)
         except NoSuchElementException:
             price = None
             break
