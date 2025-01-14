@@ -1,16 +1,11 @@
 """Module defining an object with a method to fetch prices from various websites."""
-
 import requests
 from bs4 import BeautifulSoup
-
 from prettytable.colortable import ColorTable, Themes
-
-
 from search_exito import search_exito
 
-
 class Product:
-    """Class of a prodcut with methods fo fetch prices given URLs"""
+    """Class of a product with methods fo fetch prices given URLs"""
 
     def __init__(self, name, urls=None):
         self.name = name
@@ -74,3 +69,4 @@ test_product.set_exito_url(search_term)
 test_product.get_prices()
 
 print(test_product.prices)
+print(test_product.urls)
