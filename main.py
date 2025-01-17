@@ -42,5 +42,9 @@ class Product:
             self.urls.append(results[int(input_index)]["url"])
 
 
-test_product = Product("Arroz")
-test_product.set_exito_url("arroz")
+# scrappeador = ExitoScrapper("www.exito.com")
+# search_term = input("Enter the product you want to search: ")
+
+# print(scrappeador.search(search_term))
+
+# print(scrappeador.get_price("https://www.exito.com/cafe-molido-500-gr-50368/p"))

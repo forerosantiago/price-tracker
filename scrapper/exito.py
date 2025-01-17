@@ -3,21 +3,26 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.firefox.firefox_profile import FirefoxProfile
 
-import requests
-from bs4 import BeautifulSoup
-
-
-from scrapper import Scrapper
+from scrapper import SharedScrapper
 
 
-class ExitoScrapper(Scrapper):
+class ExitoScrapper(SharedScrapper):
     """Scrapper class for Exito.com website"""
+
+    def __init__(self):
+        super().__init__("www.exito.com")
 
     def search(self, term):
         # or domain == "www.carulla.com"
         # or domain == "www.tiendasjumbo.co"
+        profile = FirefoxProfile()
+        profile.set_preference("permissions.default.image", 2)
+
         options = webdriver.FirefoxOptions()
+        options.profile = profile
+
         # options.add_argument("--headless")
         options.add_argument("--user-data-dir=cache")
         driver = webdriver.Firefox(options=options)
@@ -70,26 +75,3 @@ class ExitoScrapper(Scrapper):
             results.append(result)
 
         return results
-
-    def get_price(self, url):
-        # using a regex identify the domain
-        domain = url.split("/")[2]
-
-        if domain != "www.exito.com":
-            raise ValueError(f"Site {domain} not supported by this class")
-
-        r = requests.get(url, timeout=10)
-        if r.status_code == 200:
-            soup = BeautifulSoup(r.content, "html.parser")
-            price_tag = soup.find("meta", {"property": "product:price:amount"})
-
-            if price_tag:
-                return float(price_tag["content"])
-
-
-# scrappeador = ExitoScrapper()
-# search_term = input("Enter the product you want to search: ")
-
-# print(scrappeador.search(search_term))
-
-# print(scrappeador.get_price("https://www.exito.com/cafe-molido-500-gr-50368/p"))
