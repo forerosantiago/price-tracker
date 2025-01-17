@@ -15,7 +15,6 @@ class ExitoScrapper(SharedScrapper):
         super().__init__("www.exito.com")
 
     def search(self, term):
-        # or domain == "www.carulla.com"
         # or domain == "www.tiendasjumbo.co"
         profile = FirefoxProfile()
         profile.set_preference("permissions.default.image", 2)
