@@ -2,6 +2,7 @@
 
 from abc import ABC, abstractmethod
 
+import os
 import requests
 from bs4 import BeautifulSoup
 
@@ -33,6 +34,12 @@ class Scrapper(ABC):
             # options.add_argument("--headless")
             # options.add_argument("--user-data-dir=cache")
             cls.driver = webdriver.Firefox(options=options)
+
+            path = os.path.dirname(os.path.abspath(__file__))
+
+            cls.driver.install_addon(
+                os.path.join(path, "uBlock0_1.62.1b1.firefox.signed.xpi")
+            )
         return cls.driver
 
     @abstractmethod
@@ -59,14 +66,13 @@ class SharedScrapper(Scrapper):
         else:
             print("Error")
             return []
-        
+
         driver = self.get_driver()
 
         if self.domain == "www.exito.com" or self.domain == "www.carulla.com":
-            xpath =  "/html/body/div[1]/main/section[3]/div/div[2]/div[2]/div[2]/ul"
+            xpath = "/html/body/div[1]/main/section[3]/div/div[2]/div[2]/div[2]/ul"
         else:
-            xpath = "" # otra cosa
-
+            xpath = ""  # otra cosa
 
         driver.get(url)
 
@@ -77,7 +83,7 @@ class SharedScrapper(Scrapper):
             driver.quit()
             return []
         # find all li elements within the ul element
-        
+
         li_elements = ul_element.find_elements(By.TAG_NAME, "li")
 
         results = []
@@ -115,7 +121,7 @@ class SharedScrapper(Scrapper):
         # using a regex identify the domain
         domain = url.split("/")[2]
 
-        if domain not in ["www.exito.com", "www.carulla.com"]:
+        if domain != self.domain:
             print("Error sitio no soportado")
             raise ValueError("Sitio no soportado")
 
