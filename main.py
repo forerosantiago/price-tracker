@@ -1,50 +1,70 @@
-"""Module defining an object with a method to fetch prices from various websites."""
+from concurrent.futures import ThreadPoolExecutor
+from pick import pick
 
-from prettytable.colortable import ColorTable, Themes
+
 from scrapper.exito import ExitoScrapper
+from scrapper.carulla import CarullaScrapper
+from scrapper.jumbo import JumboScrapper
 
 
-class Product:
-    """Class of a product with methods fo fetch prices given URLs"""
-
-    def __init__(self, name, urls=None):
-        self.name = name
-
-        if urls is None:
-            self.urls = []
-        self.prices = {}
-
-    def set_exito_url(self, term):
-        """Search for a product on Exito and add the URL to the list of URLs."""
-        scrappeador = ExitoScrapper()
-
-        results = scrappeador.search(term)
-
-        if not results:
-            print("No results found")
-            return
-        else:
-            print(f"Found {len(results)} results for {term}")
-            table = ColorTable(theme=Themes.OCEAN)
-            table.field_names = ["#", "Name", "Price"]
-
-            for index, result in enumerate(results):
-                table.add_row([index, result["name"], result["price"]])
-                # print(f"URL: {result['url']}")
-
-            print(table)
-
-            input_index = input(
-                "Enter the index of the product you want to add to the list: "
-            )
-            print(results[int(input_index)]["url"])
-
-            self.urls.append(results[int(input_index)]["url"])
+# Assuming the scrapers are already defined
+exito = ExitoScrapper()
+carulla = CarullaScrapper()
+jumbo = JumboScrapper()
 
 
-# scrappeador = ExitoScrapper("www.exito.com")
-# search_term = input("Enter the product you want to search: ")
+def search_exito(term):
+    return exito.search(term)
 
-# print(scrappeador.search(search_term))
 
-# print(scrappeador.get_price("https://www.exito.com/cafe-molido-500-gr-50368/p"))
+def search_carulla(term):
+    return carulla.search(term)
+
+
+def search_jumbo(term):
+    return jumbo.search(term)
+
+
+# Get the search term
+search_term = input("Enter your search term: ")
+
+# Use ThreadPoolExecutor to run the searches concurrently
+with ThreadPoolExecutor() as executor:
+    # Submit all search tasks
+    future_exito = executor.submit(search_exito, search_term)
+    future_carulla = executor.submit(search_carulla, search_term)
+    future_jumbo = executor.submit(search_jumbo, search_term)
+
+    # Wait for all tasks to complete and get results
+    resultados_exito = future_exito.result()
+    resultados_carulla = future_carulla.result()
+    resultados_jumbo = future_jumbo.result()
+
+
+# use pick to select a product from each store
+
+title = "Please choose a product: "
+options_exito = [result["name"] for result in resultados_exito]
+options_carulla = [result["name"] for result in resultados_carulla]
+options_jumbo = [result["name"] for result in resultados_jumbo]
+
+if options_exito != []:
+    option_exito, index_exito = pick(options_exito, title)
+
+    print(
+        f"Selected product from Exito: {option_exito} - ${resultados_exito[index_exito]['price']}"
+    )
+if options_carulla != []:
+    option_carulla, index_carulla = pick(options_carulla, title)
+    print(
+        f"Selected product from Carulla: {option_carulla} - ${resultados_carulla[index_carulla]['price']}"
+    )
+
+if options_jumbo != []:
+    option_jumbo, index_jumbo = pick(options_jumbo, title)
+
+    print(
+        f"Selected product from Jumbo: {option_jumbo} - ${resultados_jumbo[index_jumbo]['price']}"
+    )
+
+
