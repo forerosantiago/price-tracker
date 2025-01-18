@@ -35,11 +35,11 @@ class Scrapper(ABC):
             # options.add_argument("--user-data-dir=cache")
             cls.driver = webdriver.Firefox(options=options)
 
-            path = os.path.dirname(os.path.abspath(__file__))
+            # path = os.path.dirname(os.path.abspath(__file__))
 
-            cls.driver.install_addon(
-                os.path.join(path, "uBlock0_1.62.1b1.firefox.signed.xpi")
-            )
+            # cls.driver.install_addon(
+            #   os.path.join(path, "uBlock0_1.62.1b1.firefox.signed.xpi")
+            # )
         return cls.driver
 
     @abstractmethod
