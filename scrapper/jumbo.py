@@ -34,11 +34,13 @@ class JumboScrapper(SharedScrapper):
                 By.CSS_SELECTOR, ".tiendasjumboqaio-jumbo-minicart-2-x-price"
             )
 
+            price = float(price.text.replace("$", "").replace(" ", "").replace(".", ""))
+
             url = product.find_element(By.TAG_NAME, "a")
 
             result = {
                 "name": name.text,
-                "price": price.text,
+                "price": price,
                 "url": url.get_attribute("href"),
             }
             results.append(result)
