@@ -16,7 +16,6 @@ class JumboScrapper(SharedScrapper):
         driver = self.get_driver()
 
         url = f"https://www.tiendasjumbo.co/{term.replace(' ', '%20')}?_q={term.replace(' ', '%20')}&map=ft"
-        print(url)
         driver.get(url)
 
         products = driver.find_elements(
