@@ -4,6 +4,8 @@ from selenium.webdriver.common.by import By
 
 from scrapper import SharedScrapper
 
+from scrapper.product import Product
+
 
 class JumboScrapper(SharedScrapper):
     """Class to fetch prices from www.exito.com"""
@@ -38,11 +40,8 @@ class JumboScrapper(SharedScrapper):
 
             url = product.find_element(By.TAG_NAME, "a")
 
-            result = {
-                "name": name.text,
-                "price": price,
-                "url": url.get_attribute("href"),
-            }
+            result = Product(name.text, url.get_attribute("href"), price)
+
             results.append(result)
 
         return results

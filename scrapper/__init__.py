@@ -12,6 +12,8 @@ from selenium.webdriver.firefox.firefox_profile import FirefoxProfile
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 
+from scrapper.product import Product
+
 
 class Scrapper(ABC):
     """Base class for a scrapper"""
@@ -111,9 +113,12 @@ class SharedScrapper(Scrapper):
             a_element = li.find_element(By.TAG_NAME, "a")
             url = a_element.get_attribute("href")
 
-            result = {"name": name, "price": price, "url": url}
+            result = Product(name, url, price)
 
             results.append(result)
+
+        # close driver
+        # driver.quit()
 
         return results
 
