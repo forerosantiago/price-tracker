@@ -2,13 +2,13 @@
 
 from selenium.webdriver.common.by import By
 
-from scrapper import SharedScrapper
+from scrapper import Scrapper
 
 from scrapper.product import Product
 
 
-class JumboScrapper(SharedScrapper):
-    """Class to fetch prices from www.exito.com"""
+class JumboScrapper(Scrapper):
+    """Class to fetch prices from www.jumbo.com"""
 
     def __init__(self):
         super().__init__("www.tiendasjumbo.co")
@@ -46,3 +46,6 @@ class JumboScrapper(SharedScrapper):
 
         driver.close()
         return results
+
+    def get_price(self, url):
+        return "sapa"
