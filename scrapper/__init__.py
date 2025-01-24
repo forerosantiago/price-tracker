@@ -33,7 +33,7 @@ class Scrapper(ABC):
             options = webdriver.FirefoxOptions()
             options.profile = profile
 
-            options.add_argument("--headless")
+            # options.add_argument("--headless")
             # options.add_argument("--user-data-dir=cache")
             cls.driver = webdriver.Firefox(options=options)
 
@@ -119,6 +119,7 @@ class SharedScrapper(Scrapper):
 
         # close driver
         # driver.quit()
+        driver.close()
 
         return results
 

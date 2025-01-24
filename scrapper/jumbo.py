@@ -44,4 +44,5 @@ class JumboScrapper(SharedScrapper):
 
             results.append(result)
 
+        driver.close()
         return results
