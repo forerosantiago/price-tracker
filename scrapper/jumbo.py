@@ -1,5 +1,8 @@
 """Definition for JumboScrapper class."""
 
+import re
+import requests
+
 from selenium.webdriver.common.by import By
 
 from scrapper import Scrapper
@@ -48,4 +51,15 @@ class JumboScrapper(Scrapper):
         return results
 
     def get_price(self, url):
-        return "sapa"
+        r = requests.get(url, timeout=10)
+        if r.status_code == 200:
+
+
+            # Regular expression to extract the number after "Price":
+            match = re.search(r'"Price":(\d+)', r.text)
+
+            if match:
+                price = float(match.group(1))
+                return price
+            else:
+                return None
