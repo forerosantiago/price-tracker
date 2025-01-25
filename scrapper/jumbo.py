@@ -5,7 +5,7 @@ import requests
 
 from selenium.webdriver.common.by import By
 
-from scrapper import Scrapper
+from scrapper.scrapper import Scrapper
 
 from scrapper.product import Product
 

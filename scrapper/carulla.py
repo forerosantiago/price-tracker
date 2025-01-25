@@ -1,6 +1,6 @@
 """Definition for CarullaScrapper class."""
 
-from scrapper import SharedScrapper
+from scrapper.shared_scrapper import SharedScrapper
 
 
 class CarullaScrapper(SharedScrapper):

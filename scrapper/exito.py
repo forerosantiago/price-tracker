@@ -1,6 +1,6 @@
 """Definition for ExitoScrapper class."""
 
-from scrapper import SharedScrapper
+from scrapper.shared_scrapper import SharedScrapper
 
 
 class ExitoScrapper(SharedScrapper):
