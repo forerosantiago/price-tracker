@@ -1,0 +1,4 @@
+beautifulsoup4==4.12.3
+pick==2.4.0
+Requests==2.32.3
+selenium==4.28.1
