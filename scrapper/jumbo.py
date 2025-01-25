@@ -51,9 +51,14 @@ class JumboScrapper(Scrapper):
         return results
 
     def get_price(self, url):
+
+        domain = url.split("/")[2]
+
+        if domain != self.domain:
+            raise RuntimeError("Sitio no soportado")
+
         r = requests.get(url, timeout=10)
         if r.status_code == 200:
-
 
             # Regular expression to extract the number after "Price":
             match = re.search(r'"Price":(\d+)', r.text)
