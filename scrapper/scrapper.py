@@ -19,7 +19,8 @@ class Scrapper(ABC):
         """Return the shared WebDriver instance."""
         if cls.driver is None:
             profile = FirefoxProfile()
-            profile.set_preference("permissions.default.image", 2)
+            profile.set_preference("permissions.default.image", 2)  # disable images
+            profile.set_preference("permissions.default.font", 2)  # disable fonts
 
             options = webdriver.FirefoxOptions()
             options.profile = profile
