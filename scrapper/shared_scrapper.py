@@ -10,6 +10,7 @@ from scrapper.scrapper import Scrapper
 
 from scrapper.product import Product
 
+
 class SharedScrapper(Scrapper):
     """Subclass for www.exito.com, www.carulla.com and www.tiendasjumbo.co"""
 
