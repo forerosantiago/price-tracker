@@ -128,8 +128,7 @@ class SharedScrapper(Scrapper):
         domain = url.split("/")[2]
 
         if domain != self.domain:
-            print("Error sitio no soportado")
-            raise ValueError("Sitio no soportado")
+            raise RuntimeError("Sitio no soportado")
 
         r = requests.get(url, timeout=10)
         if r.status_code == 200:
