@@ -1,11 +1,11 @@
 """Demonstration for the scrapper module."""
 
+from concurrent.futures import ThreadPoolExecutor
 from pick import pick
 
 from scrapper.exito import ExitoScrapper
 from scrapper.carulla import CarullaScrapper
 from scrapper.jumbo import JumboScrapper
-from concurrent.futures import ThreadPoolExecutor
 
 # Initialize scrapers
 exito = ExitoScrapper()
