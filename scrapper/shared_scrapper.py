@@ -27,7 +27,7 @@ class SharedScrapper(Scrapper):
 
         driver = self.get_driver()
 
-        if self.domain == "www.exito.com" or self.domain == "www.carulla.com":
+        if self.domain in ("www.exito.com", "www.carulla.com"):
             xpath = "/html/body/div[1]/main/section[3]/div/div[2]/div[2]/div[2]/ul"
         else:
             xpath = ""  # otra cosa
@@ -93,3 +93,5 @@ class SharedScrapper(Scrapper):
 
             if price_tag:
                 return float(price_tag["content"])
+
+        return None

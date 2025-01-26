@@ -20,7 +20,8 @@ class JumboScrapper(Scrapper):
         """Get the price of a product from Jumbo."""
         driver = self.get_driver()
 
-        url = f"https://www.tiendasjumbo.co/{term.replace(' ', '%20')}?_q={term.replace(' ', '%20')}&map=ft"
+        query = term.replace(" ", "%20")
+        url = f"https://www.tiendasjumbo.co/{query}?_q={query}&map=ft"
         driver.get(url)
 
         products = driver.find_elements(
@@ -66,5 +67,4 @@ class JumboScrapper(Scrapper):
             if match:
                 price = float(match.group(1))
                 return price
-            else:
-                return None
+        return None
