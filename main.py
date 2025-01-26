@@ -1,4 +1,5 @@
 """Demonstration for the scrapper module."""
+
 from pick import pick
 
 from scrapper.exito import ExitoScrapper
@@ -11,9 +12,11 @@ exito = ExitoScrapper()
 carulla = CarullaScrapper()
 jumbo = JumboScrapper()
 
+
 def fetch_products(scraper, search_term):
     """Fetch products from a given scraper."""
     return scraper.search(search_term)
+
 
 # Input from the user
 term = input("Enter your search term: ")
@@ -24,7 +27,7 @@ with ThreadPoolExecutor() as executor:
     future_exito = executor.submit(fetch_products, exito, term)
     future_carulla = executor.submit(fetch_products, carulla, term)
     future_jumbo = executor.submit(fetch_products, jumbo, term)
-    
+
     # Collect results as they finish
     exito_products = future_exito.result()
     carulla_products = future_carulla.result()
@@ -37,7 +40,9 @@ else:
     print("No products found in Exito")
 
 if carulla_products:
-    option_carulla, index_carulla = pick(carulla_products, "Select a product from Carulla: ")
+    option_carulla, index_carulla = pick(
+        carulla_products, "Select a product from Carulla: "
+    )
     print(f"Selected product from Carulla: {option_carulla}")
 else:
     print("No products found in Carulla")
