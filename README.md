@@ -1,20 +1,34 @@
 # price-tracker
 
 ## To run locally
-1. Ensure you have Python installed (version 3.6 or higher).
+1. Ensure you have Python installed (version 3.6 or higher) and Firefox.
+
 2. Clone the repository.
     ```bash
    git clone https://github.com/forerosantiago/price-tracker
     ```
+
 3. Navigate to the project directory.
    ```bash
    cd price-tracker
    ```
-4. Install the required packages:
+
+4. Create a virtual python enviroment
+    ```bash
+   python -m venv venv
+    ```
+
+5. Activate the virtual environment
+    ```bash
+   source venv/bin/activate
+    ```
+
+6. Install the required packages:
    ```bash
    pip install -r requirements.txt
    ```
-5. Run the main script:
+   
+7. Run the main script:
    ```bash
    python main.py
    ```
