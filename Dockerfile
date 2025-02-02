@@ -1,9 +1,9 @@
 # Use the official Python image as a base
 FROM python:3.9-slim
 
-# Install Firefox and Geckodriver
+# Install Firefox, Geckodriver and Sqlite3
 RUN apt-get update && apt-get install -y \
-    firefox-esr
+    firefox-esr sqlite3
 
 # Set the working directory in the container
 WORKDIR /app
