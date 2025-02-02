@@ -17,23 +17,23 @@ class Scrapper(ABC):
     @classmethod
     def get_driver(cls):
         """Return the shared WebDriver instance."""
-        if cls.driver is None:
-            profile = FirefoxProfile()
-            profile.set_preference("permissions.default.image", 2)  # disable images
-            profile.set_preference("permissions.default.font", 2)  # disable fonts
 
-            options = webdriver.FirefoxOptions()
-            options.profile = profile
+        profile = FirefoxProfile()
+        profile.set_preference("permissions.default.image", 2)  # disable images
+        profile.set_preference("permissions.default.font", 2)  # disable fonts
 
-            options.add_argument("--headless")
-            # options.add_argument("--user-data-dir=cache")
-            cls.driver = webdriver.Firefox(options=options)
+        options = webdriver.FirefoxOptions()
+        options.profile = profile
 
-            # path = os.path.dirname(os.path.abspath(__file__))
+        options.add_argument("--headless")
+        # options.add_argument("--user-data-dir=cache")
+        cls.driver = webdriver.Firefox(options=options)
 
-            # cls.driver.install_addon(
-            #   os.path.join(path, "uBlock0_1.62.1b1.firefox.signed.xpi")
-            # )
+        # path = os.path.dirname(os.path.abspath(__file__))
+
+        # cls.driver.install_addon(
+        #   os.path.join(path, "uBlock0_1.62.1b1.firefox.signed.xpi")
+        # )
         return cls.driver
 
     @abstractmethod
