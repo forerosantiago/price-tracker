@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS ProductStore (
     product_id INTEGER REFERENCES Products(id),
     store_id INTEGER REFERENCES Store(id),
     name TEXT,
-    url TEXT,
+    url TEXT UNIQUE,
     last_price REAL,
     UNIQUE(product_id, store_id)
 )
