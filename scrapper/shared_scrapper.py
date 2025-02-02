@@ -18,7 +18,7 @@ class SharedScrapper(Scrapper):
         # or domain == "www.tiendasjumbo.co"
 
         if self.domain == "www.exito.com":
-            url = f"https://www.exito.com/s?q={term.replace(' ', '-')}&sort=score_desc&page=0"
+            url = f"https://www.exito.com/s?q={term.replace(' ', '+')}&sort=score_desc&page=0"
         elif self.domain == "www.carulla.com":
             url = f"https://www.carulla.com/s?q={term.replace(' ', '+')}&sort=score_desc&page=0"
         else:
