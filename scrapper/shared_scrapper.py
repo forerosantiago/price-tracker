@@ -68,8 +68,9 @@ class SharedScrapper(Scrapper):
 
             a_element = li.find_element(By.TAG_NAME, "a")
             url = a_element.get_attribute("href")
+            img_url = li.find_element(By.TAG_NAME, "img").get_attribute("src")
 
-            result = Product(name, url, price)
+            result = Product(name, url, price, img_url)
 
             results.append(result)
 

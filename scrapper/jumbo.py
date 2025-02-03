@@ -44,7 +44,9 @@ class JumboScrapper(Scrapper):
 
             url = product.find_element(By.TAG_NAME, "a")
 
-            result = Product(name.text, url.get_attribute("href"), price)
+            img_url = product.find_element(By.TAG_NAME, "img").get_attribute("src")
+
+            result = Product(name.text, url.get_attribute("href"), price, img_url)
 
             results.append(result)
 
