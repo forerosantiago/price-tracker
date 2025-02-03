@@ -19,8 +19,17 @@ def execute_query(query, params=None):
 execute_query('''
 CREATE TABLE IF NOT EXISTS Products (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT UNIQUE
+    name TEXT UNIQUE,
+    image_url TEXT
 )
+''')
+
+# create sample product
+execute_query('''
+INSERT OR IGNORE INTO Products (name, image_url) VALUES
+            ('Apple', 'https://th.bing.com/th?id=OSK.ltvSJTmoyE5rpGQvfAlGoYLWlGWItpzKQQ6H0tfAFPg&w=224&h=200&c=12&rs=1&r=0&o=6&pid=SANGAM'),
+            ('Banana', 'https://www.bing.com/th?id=OIP.rYDhN8E1MHf6oE63MM9C-wHaFj&w=248&h=185&c=8&rs=1&qlt=90&r=0&o=6&pid=3.1&rm=2'),
+            ('Orange', 'https://th.bing.com/th/id/OIP.JHF15LJdaA9X_lVGaquRTQHaE8?rs=1&pid=ImgDetMain')
 ''')
 
 execute_query('''
