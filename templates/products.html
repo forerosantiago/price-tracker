@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+        <h2>Listing {{ products|length }} products:</h2>
+
+        {% for product in products %}
+        <hr>
+        <div class="product">
+            <br>{{ product[0] }}</br>
+            <h3>{{ product[1] }}</h3>
+            <img src="{{ product[2] }}" alt="" srcset="">
+        </div>
+        {% endfor %}       
+
+{% endblock %}

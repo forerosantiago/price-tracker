@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Flask App{% endblock %}</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: #F0F4EF;
+        }
+
+        nav {
+            background: #BFCC94;
+            padding: 1%;
+        }
+
+        #content {
+            margin: 2%;
+        }
+
+        input[type=text] {
+            padding: 12px 20px;
+        }
+
+    </style>
+
+</head>
+<body>
+    {% include 'header.html' %}
+
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+
+</body>
+</html>
