@@ -4,6 +4,8 @@ import re
 import requests
 
 from selenium.webdriver.common.by import By
+from selenium.common.exceptions import NoSuchElementException
+
 
 from scrapper.scrapper import Scrapper
 
@@ -44,7 +46,10 @@ class JumboScrapper(Scrapper):
 
             url = product.find_element(By.TAG_NAME, "a")
 
-            img_url = product.find_element(By.TAG_NAME, "img").get_attribute("src")
+            try:
+                img_url = product.find_element(By.TAG_NAME, "img").get_attribute("src")
+            except NoSuchElementException:
+                img_url = None
 
             result = Product(name.text, url.get_attribute("href"), price, img_url)
 
