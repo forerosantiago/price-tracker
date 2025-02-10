@@ -16,14 +16,14 @@ class JumboScrapper(Scrapper):
     """Class to fetch prices from www.jumbo.com"""
 
     def __init__(self):
-        super().__init__("www.tiendasjumbo.co")
+        super().__init__("www.jumbocolombia.com")
 
     def search(self, term):
         """Get the price of a product from Jumbo."""
         driver = self.get_driver()
 
         query = term.replace(" ", "%20")
-        url = f"https://www.tiendasjumbo.co/{query}?_q={query}&map=ft"
+        url = f"https://www.jumbocolombia.co/{query}?_q={query}&map=ft"
         driver.get(url)
 
         products = driver.find_elements(
