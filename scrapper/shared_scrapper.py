@@ -68,7 +68,10 @@ class SharedScrapper(Scrapper):
 
             a_element = li.find_element(By.TAG_NAME, "a")
             url = a_element.get_attribute("href")
-            img_url = li.find_element(By.TAG_NAME, "img").get_attribute("src")
+            try:
+                img_url = li.find_element(By.TAG_NAME, "img").get_attribute("src")
+            except NoSuchElementException:
+                img_url = None
 
             result = Product(name, url, price, img_url)
 
