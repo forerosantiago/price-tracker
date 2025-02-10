@@ -1,4 +1,7 @@
+"""This module contains utility functions for the web application and database management."""
+
 import sqlite3
+import json
 
 from scrapper.product import Product
 
@@ -23,6 +26,7 @@ class ListedProduct(Product):
 
 
 class Store:
+    """Store class to represent a store in the database"""
     def __init__(self, id, name, url):
         self.id = id
         self.name = name
@@ -39,13 +43,13 @@ def get_all_products():
 
     for entry in entries:
 
-        id = entry[0]
+        product_id = entry[0]
         name = entry[1]
         img_url = entry[2]
 
         products.append(
             ListedProduct(
-                name, url=None, price=None, image_url=img_url, id=id, store_name=None
+                name, url=None, price=None, image_url=img_url, id=product_id, store_name=None
             )
         )
 
@@ -67,11 +71,11 @@ def list_stores():
     return stores
 
 
-def get_store_by_id(id):
+def get_store_by_id(store_id):
     conn = sqlite3.connect("test.db")
     cursor = conn.cursor()
 
-    entries = cursor.execute("SELECT * FROM Stores WHERE id = ?", (id,)).fetchone()
+    entries = cursor.execute("SELECT * FROM Stores WHERE id = ?", (store_id,)).fetchone()
 
     return Store(id=entries[0], name=entries[1], url=entries[2])
 
@@ -131,7 +135,6 @@ def update_prices(product_id):
     conn.close()
 
 
-import json
 
 
 def get_price_history_by_id(product_id):
@@ -142,19 +145,19 @@ def get_price_history_by_id(product_id):
 
     productstores = get_product_store_s(product_id)
 
-    for productStore in productstores:
-        price_history[productStore.name] = {}
+    for product_store in productstores:
+        price_history[product_store.name] = {}
 
         results = cursor.execute(
-            "SELECT * FROM PriceHistory WHERE product_store_id = ?", (productStore.id,)
+            "SELECT * FROM PriceHistory WHERE product_store_id = ?", (product_store.id,)
         ).fetchall()
 
-        price_history[productStore.name]["time"] = []
-        price_history[productStore.name]["price"] = []
+        price_history[product_store.name]["time"] = []
+        price_history[product_store.name]["price"] = []
 
         for result in results:
-            price_history[productStore.name]["time"].append(result[3])
+            price_history[product_store.name]["time"].append(result[3])
 
-            price_history[productStore.name]["price"].append(result[2])
+            price_history[product_store.name]["price"].append(result[2])
 
     return json.dumps(price_history)
