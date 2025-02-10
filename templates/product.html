@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+        <hr>
+        <div class="product">
+            <br>{{ product.name }}</br>
+            <img src="{{ product.image_url }}" alt="" srcset="">
+        </div>
+
+        <h3>Buy in</h3>
+        <ul>
+            {% for entry in listed_products %}
+                <li><a href="{{ entry.url }}">{{ entry.store_name }} ({{entry.price}})</a></li>
+            {% endfor %}
+        </ul>
+
+        <!-- Include Plotly.js -->
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+        <!-- Div for the plot -->
+        <div id="price-chart" style="width:100%;max-width:700px;margin:auto;"></div>
+        
+        <script>
+            var data = JSON.parse({{ price_history | tojson | safe }});
+
+            var traces = [];
+
+            for (var store in data) {
+                traces.push({
+                    x: data[store].time,
+                    y: data[store].price,
+                    mode: 'lines+markers',
+                    name: store
+                });
+            }
+
+            var layout = {
+                title: 'Price History',
+                xaxis: {
+                    title: 'Time'
+                },
+                yaxis: {
+                    title: 'Price'
+                }
+            };
+
+            Plotly.newPlot('price-chart', traces, layout);
+
+            
+
+            
+
+
+</script>
+
+
+
+{% endblock %}

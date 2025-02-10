@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h2>Create product</h2>
+
+    {% if message %}
+        <p>{{ message }}</p>
+    
+    {% else %}
+        <form action="/create-product" method="post">
+            <input type="text" name="name" id="" placeholder="product name">
+            <input type="text" name="image_url" id="" placeholder="image url">
+
+            <h3>Stores</h3>
+            {% for store in stores %}
+                <input type="text" name="{{ store[1] }}" class="store-input" placeholder="{{ store[1] }} URL">
+            {% endfor %}
+
+
+            <input type="submit" value="Create product">
+        </form>
+
+
+    {% endif %}
+    
+    
+
+
+
+{% endblock %}

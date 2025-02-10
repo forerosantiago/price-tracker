@@ -6,9 +6,11 @@
         {% for product in products %}
         <hr>
         <div class="product">
-            <br>{{ product[0] }}</br>
-            <h3>{{ product[1] }}</h3>
-            <img src="{{ product[2] }}" alt="" srcset="">
+            <a href="/product/{{ product.id }}">
+                <br>{{ product.name }}</br>
+                <h3>{{ product[1] }}</h3>
+                <img src="{{ product.image_url }}" alt="" srcset="">
+            </a>
         </div>
         {% endfor %}       
 
