@@ -96,6 +96,6 @@ class SharedScrapper(Scrapper):
             price_tag = soup.find("meta", {"property": "product:price:amount"})
 
             if price_tag:
-                return float(price_tag["content"])
+                return float(price_tag.get('content', "0")) # if product is unavailable return 0
 
         return None

@@ -126,6 +126,10 @@ def update_prices(product_id):
 
     for product_store in product_stores:
         price = scrapers.get(product_store[3]).get_price(product_store[4])
+
+        if price == 0: # if product is not available dont register it in the database
+            continue
+
         cursor.execute(
             "INSERT INTO PriceHistory (product_store_id, price) VALUES (?, ?)",
             (product_store[0], price),
