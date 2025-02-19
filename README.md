@@ -27,10 +27,15 @@
    ```bash
    pip install -r requirements.txt
    ```
-   
-7. Run the main script:
+
+7. Run the database setup script:
    ```bash
-   python main.py
+   python db_setup.py
+   ```
+
+8. Run the app script:
+   ```bash
+   python app.py
    ```
 
 ## To run in Docker
