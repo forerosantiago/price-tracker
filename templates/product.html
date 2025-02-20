@@ -12,7 +12,7 @@
         <ul>
             <h3>Buy in</h3>
             {% for entry in listed_products %}
-                <li><a href="{{ entry.url }}">{{ entry.store_name }} ({{entry.price}})</a></li>
+                <li><a href="{{ entry.url }}" target="_blank">{{ entry.store_name }} ({{entry.price}})</a></li>
             {% endfor %}
         </ul>
 
