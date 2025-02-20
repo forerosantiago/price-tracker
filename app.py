@@ -129,7 +129,7 @@ def updateprices():
             for product_store in product_stores:
                 scraper = scrapers.get(product_store[3])
                 if scraper:
-                    price = scraper.get(product_store[3]).get_price(product_store[4])
+                    price = scraper.get_price(product_store[4])
 
                     if price == 0: # if product is not available dont register it in the database
                         continue
