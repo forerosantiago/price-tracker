@@ -2,16 +2,14 @@
 
 {% block content %}
         <h2>Listing {{ products|length }} products:</h2>
-
-        {% for product in products %}
-        <hr>
-        <div class="product">
-            <a href="/product/{{ product.id }}">
-                <br>{{ product.name }}</br>
-                <h3>{{ product[1] }}</h3>
-                <img src="{{ product.image_url }}" alt="" srcset="">
-            </a>
+        <div class="products">
+            {% for product in products %}
+            <div class="product">
+                <a href="/product/{{ product.id }}">
+                    <p>{{ product.name }}</p>
+                    <img src="{{ product.image_url }}" alt="" srcset="">
+                </a>
+            </div>
+            {% endfor %}       
         </div>
-        {% endfor %}       
-
 {% endblock %}

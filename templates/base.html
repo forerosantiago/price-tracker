@@ -10,25 +10,101 @@
         body {
             margin: 0;
             padding: 0;
-            background: #F0F4EF;
+            background: #F4F4F9;
+            color: #333;
+            font-family: Arial, sans-serif;
         }
 
         nav {
-            background: #BFCC94;
-            padding: 1%;
+            background-color: #4CAF50;
+            padding: 1rem 2rem;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+        }
+        
+        nav a:hover {
+           text-decoration: underline;
         }
 
         #content {
-            margin: 2%;
+            margin: 2% 5%;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
         }
 
         input[type=text] {
             padding: 12px 20px;
         }
 
-        img {
-            max-width: 500px;
+        .products img {
+            width: 100%;
+            max-width: 165px;
+            height: auto;
+
         }
+        
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            justify-content: center;
+
+        }
+
+        .product {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .product img {
+            width: 100%;
+        }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            background-color: #fff;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0/1);
+            margin-bottom: 3rem;
+        }
+
+        .item img {
+            width: 500px;
+            border-radius: 8px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        ul {
+            background: red;
+            
+            width: 40%;
+        }
+
     </style>
 
 </head>
