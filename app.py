@@ -28,6 +28,7 @@ def products():
     """List all products found in the database."""
     product_list = []
     with sqlite3.connect("database.db") as conn:
+        conn.execute("PRAGMA journal_mode=WAL;")
         cursor = conn.cursor()
         entries = cursor.execute("SELECT * FROM Products").fetchall()
 
@@ -67,6 +68,7 @@ def product(prod_id):
 def create_product():
     """Create a product."""
     with sqlite3.connect("database.db") as conn:
+        conn.execute("PRAGMA journal_mode=WAL;")
         cursor = conn.cursor()
         stores = cursor.execute("SELECT * FROM Stores").fetchall()
 
@@ -117,6 +119,7 @@ def updateprices():
     """Update all prices on the database."""
 
     with sqlite3.connect("database.db") as conn:
+        conn.execute("PRAGMA journal_mode=WAL;")
         cursor = conn.cursor()
 
         all_ids = cursor.execute("SELECT id FROM Products").fetchall()

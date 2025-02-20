@@ -36,6 +36,7 @@ class Store:
 
 def get_product_by_id(id):
     with sqlite3.connect("database.db") as conn:
+        conn.execute("PRAGMA journal_mode=WAL;")
         cursor = conn.cursor()
         entry = cursor.execute("SELECT * FROM Products WHERE id = ?", (id,)).fetchone()
 
@@ -44,6 +45,7 @@ def get_product_by_id(id):
 
 def get_product_stores_by_id(id):
     with sqlite3.connect("database.db") as conn:
+        conn.execute("PRAGMA journal_mode=WAL;")
         cursor = conn.cursor()
         entries = cursor.execute(
             "SELECT * FROM ProductStores WHERE product_id = ?", (id,)
@@ -68,6 +70,7 @@ def get_product_stores_by_id(id):
 def get_price_history_by_id(product_id):
     """Returns a json object with the price history of a given product id"""
     with sqlite3.connect("database.db") as conn:
+        conn.execute("PRAGMA journal_mode=WAL;")
         cursor = conn.cursor()
 
         price_history = {}
