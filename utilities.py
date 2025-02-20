@@ -51,6 +51,7 @@ def get_product_stores_by_id(id):
 
         product_stores = []
         for entry in entries:
+            store_name = cursor.execute("SELECT name FROM Stores WHERE id = ?", (entry[2],)).fetchone()[0]
             product_stores.append(
                 ListedProduct(
                     name=entry[3],
@@ -58,13 +59,14 @@ def get_product_stores_by_id(id):
                     price=entry[5],
                     image_url=None,
                     id=entry[0],
-                    store_name=get_store_by_id(entry[2]).name,
+                    store_name=store_name,
                 )
             )
         return product_stores
 
 
 def get_price_history_by_id(product_id):
+    """Returns a json object with the price history of a given product id"""
     with sqlite3.connect("database.db") as conn:
         cursor = conn.cursor()
 
