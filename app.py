@@ -123,23 +123,19 @@ def updateprices():
 
         for product_id in all_ids:
             product_stores = cursor.execute(
-                "SELECT * FROM ProductStores WHERE product_id = ?", (product_id[0],)
+            "SELECT * FROM ProductStores WHERE product_id = ?", (product_id[0],)
             ).fetchall()
 
             for product_store in product_stores:
                 scraper = scrapers.get(product_store[3])
                 if scraper:
-                    price = scraper.get_price(product_store[4])
+                    price = scraper.get(product_store[3]).get_price(product_store[4])
 
-                if (
-                    price == 0
-                ):  # if product is not available dont register it in the database
-                    continue
+                    if price == 0: # if product is not available dont register it in the database
+                        continue
 
                 cursor.execute(
-                    "INSERT INTO PriceHistory (product_store_id, price) VALUES (?, ?)",
-                    (product_store[0], price),
-                )
+                "INSERT INTO PriceHistory (product_store_id, price) VALUES (?, ?)", (product_store[0], price),)
 
         conn.commit()
     return "Prices updated successfully"
