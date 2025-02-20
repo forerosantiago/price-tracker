@@ -33,30 +33,6 @@ class Store:
         self.url = url
 
 
-def get_all_products():
-    """Returns a list of Product objects from the database"""
-    conn = sqlite3.connect("test.db")
-    cursor = conn.cursor()
-    entries = cursor.execute("SELECT * FROM Products").fetchall()
-
-    products = []
-
-    for entry in entries:
-
-        product_id = entry[0]
-        name = entry[1]
-        img_url = entry[2]
-
-        products.append(
-            ListedProduct(
-                name, url=None, price=None, image_url=img_url, id=product_id, store_name=None
-            )
-        )
-
-    cursor.close()
-
-    return products
-
 
 def list_stores():
     conn = sqlite3.connect("test.db")
@@ -68,6 +44,7 @@ def list_stores():
     for entry in entries:
         stores.append(Store(entry[0], entry[1], entry[2]))
 
+    conn.close()
     return stores
 
 
@@ -77,42 +54,36 @@ def get_store_by_id(store_id):
 
     entries = cursor.execute("SELECT * FROM Stores WHERE id = ?", (store_id,)).fetchone()
 
+    conn.close()
     return Store(id=entries[0], name=entries[1], url=entries[2])
 
 
-def get_product_store_s(product_id):
-    conn = sqlite3.connect("test.db")
-    cursor = conn.cursor()
+def get_product_by_id(id):
+    with sqlite3.connect("database.db") as conn:
+        cursor = conn.cursor()
+        entry = cursor.execute("SELECT * FROM Products WHERE id = ?", (id,)).fetchone()
+        
+        return Product(name=entry[1], url=None, price=None, image_url=entry[2])
 
-    entries = cursor.execute(
-        "SELECT * FROM ProductStore WHERE product_id = ?", (product_id,)
-    ).fetchall()
+def get_product_stores_by_id(id):
+    with sqlite3.connect("database.db") as conn:
+        cursor = conn.cursor()
+        entries = cursor.execute("SELECT * FROM ProductStores WHERE product_id = ?", (id,)).fetchall()
 
-    products = []
-    for entry in entries:
-        products.append(
-            ListedProduct(
-                name=entry[3],
-                url=entry[4],
-                price=entry[5],
-                image_url=None,
-                id=entry[0],
-                store_name=get_store_by_id(entry[2]).name,
+        product_stores = []
+        for entry in entries:
+            product_stores.append(
+                ListedProduct(
+                    name=entry[3],
+                    url=entry[4],
+                    price=entry[5],
+                    image_url=None,
+                    id=entry[0],
+                    store_name=get_store_by_id(entry[2]).name,
+                )
             )
-        )
+        return product_stores
 
-    return products
-
-
-def get_product_by_id(product_id):
-    conn = sqlite3.connect("test.db")
-    cursor = conn.cursor()
-
-    raw = cursor.execute(
-        "SELECT * FROM Products WHERE id = ?", (product_id,)
-    ).fetchone()
-
-    return Product(name=raw[1], url=None, price=None, image_url=raw[2])
 
 
 def update_prices(product_id):
@@ -147,7 +118,7 @@ def get_price_history_by_id(product_id):
 
     price_history = {}
 
-    productstores = get_product_store_s(product_id)
+    productstores = get_product_stores_by_id(product_id)
 
     for product_store in productstores:
         price_history[product_store.name] = {}
@@ -164,4 +135,5 @@ def get_price_history_by_id(product_id):
 
             price_history[product_store.name]["price"].append(result[2])
 
+    conn.close()
     return json.dumps(price_history)
