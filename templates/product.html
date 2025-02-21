@@ -26,12 +26,21 @@
 
             var traces = [];
 
+            var colors = {
+                "Exito": "#ffbf00",
+                "Carulla": "#8dc63f",
+                "Jumbo": "#0a8920"
+             }
+
             for (var store in data) {
                 traces.push({
                     x: data[store].time,
                     y: data[store].price,
                     mode: 'lines+markers',
-                    name: store
+                    name: store,
+                    line: { color: colors[store] }, // Line color
+                    marker: { color: colors[store] } // Marker color
+
                 });
             }
 
