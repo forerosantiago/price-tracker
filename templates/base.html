@@ -70,8 +70,16 @@
             overflow: hidden;
             text-align: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .product a {
+            text-decoration: none;
         }
 
+        .product p {
+            color: #222;
+        }
         .product:hover {
             transform: translateY(-10px);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
@@ -90,17 +98,19 @@
             border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0/1);
             margin-bottom: 3rem;
+
+            flex-wrap: wrap;
         }
 
         .item img {
             width: 500px;
+            max-width: 80vw;
             border-radius: 8px;
             object-fit: cover;
             transition: transform 0.3s ease;
         }
 
         ul {
-            background: red;
             
             width: 40%;
         }
