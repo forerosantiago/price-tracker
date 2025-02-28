@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='logo.png') }}" type="image/x-icon">
     <title>{% block title %}Price tracker{% endblock %}</title>
 
     <style>
@@ -115,6 +116,23 @@
             width: 40%;
         }
 
+        footer {
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 6vh;
+        }
+
+        footer a {
+            color: black;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+           text-decoration: underline;
+        }
+
     </style>
 
 </head>
@@ -125,5 +143,8 @@
         {% block content %}{% endblock %}
     </div>
 
+    <footer>
+        <a href="https://github.com/forerosantiago/price-tracker">Source code</a>
+    </footer>
 </body>
 </html>
