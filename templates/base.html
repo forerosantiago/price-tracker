@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+     <!-- Meta tags for character set and responsive design -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="{{ url_for('static', filename='logo.png') }}" type="image/x-icon">
     <title>{% block title %}Price tracker{% endblock %}</title>
-
+    
+    <!-- Internal CSS for styling -->
     <style>
 
         body {
@@ -142,7 +144,7 @@
     <div id="content">
         {% block content %}{% endblock %}
     </div>
-
+    <!-- Footer with link to source code -->
     <footer>
         <a href="https://github.com/forerosantiago/price-tracker">Source code</a>
     </footer>
