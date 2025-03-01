@@ -51,11 +51,11 @@
                 x: [currentTime, currentTime],
                 y: [Math.min(...traces.flatMap(t => t.y)), Math.max(...traces.flatMap(t => t.y))],
                 mode: 'lines',
-                //name: 'Current Time',
+                name: 'Current Time',
                 line: {
                     color: 'red',
                     dash: 'dashdot',
-                    width: 4
+                    width: 3
                 },
                 layer: 'below',
             };
