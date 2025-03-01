@@ -13,7 +13,7 @@
         <ul>
             <h3>Buy in</h3>
             {% for entry in listed_products %}
-                <li><a href="{{ entry.url }}" target="_blank">{{ entry.store_name }} ({{entry.price}})</a></li>
+                <li><a href="{{ entry.url }}" target="_blank">{{ entry.store_name }}</a></li>
             {% endfor %}
         </ul>
 
@@ -43,6 +43,25 @@
 
                 });
             }
+
+            var currentTime = new Date().toISOString();
+
+            // Add a vertical line at the current time
+            var verticalLine = {
+                x: [currentTime, currentTime],
+                y: [Math.min(...traces.flatMap(t => t.y)), Math.max(...traces.flatMap(t => t.y))],
+                mode: 'lines',
+                //name: 'Current Time',
+                line: {
+                    color: 'red',
+                    dash: 'dashdot',
+                    width: 4
+                },
+                layer: 'below',
+            };
+
+            traces.push(verticalLine);
+
 
             var layout = {
                 title: 'Price History',
