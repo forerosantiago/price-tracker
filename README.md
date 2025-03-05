@@ -65,8 +65,8 @@ Scrapper --|> JumboScrapper
         }
 
         
-SharedScrapper --> ExitoScrapper
-SharedScrapper --> CarullaScrapper
+SharedScrapper --|> ExitoScrapper
+SharedScrapper --|> CarullaScrapper
 
 class ExitoScrapper {
         -   __init__(self) None
@@ -90,5 +90,9 @@ class CarullaScrapper {
         -  __init__(self, name, url, price) None
         -  __str__(self) str
         }
+class ListedProduct{
+        - __init__(self, name, url, price,imagine_url, id, store_name) None
+        }
+Product --|> ListedProduct
 ```
 
