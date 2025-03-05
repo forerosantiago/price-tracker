@@ -95,4 +95,5 @@ class ListedProduct{
         }
 Product --|> ListedProduct
 ```
-
+# Database schema
+![Database schema](https://raw.githubusercontent.com/Nigonzalezf/price-tracker/refs/heads/main/database%20schema.png)
