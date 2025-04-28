@@ -9,13 +9,14 @@ from scrapper.exito import ExitoScrapper
 from scrapper.carulla import CarullaScrapper
 from scrapper.jumbo import JumboScrapper
 
+# Dictionary mapping store names to their respective scraper instances
 scrapers = {
     "Exito": ExitoScrapper(),
     "Carulla": CarullaScrapper(),
     "Jumbo": JumboScrapper(),
 }
 
-
+# ListedProduct extends the Product class to include additional attributes like id and store_name
 class ListedProduct(Product):
     """ListedProduct extends Product to add the id attribute"""
 
@@ -24,7 +25,7 @@ class ListedProduct(Product):
         self.store_name = store_name
         self.id = id
 
-
+# Store class to represent a store in the database
 class Store:
     """Store class to represent a store in the database"""
 
@@ -33,7 +34,7 @@ class Store:
         self.name = name
         self.url = url
 
-
+# Retrieve a product from the database by its ID.
 def get_product_by_id(id):
     with sqlite3.connect("database.db") as conn:
         conn.execute("PRAGMA journal_mode=WAL;")
@@ -42,7 +43,7 @@ def get_product_by_id(id):
 
         return Product(name=entry[1], url=None, price=None, image_url=entry[2])
 
-
+# Retrieve all stores that list a product by the product's ID.
 def get_product_stores_by_id(id):
     with sqlite3.connect("database.db") as conn:
         conn.execute("PRAGMA journal_mode=WAL;")
@@ -66,7 +67,7 @@ def get_product_stores_by_id(id):
             )
         return product_stores
 
-
+# Retrieve the price history of a product by its ID.
 def get_price_history_by_id(product_id):
     """Returns a json object with the price history of a given product id"""
     with sqlite3.connect("database.db") as conn:
